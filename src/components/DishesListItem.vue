@@ -1,5 +1,10 @@
 <template>
-  <div class="item-wrapper">
+  <div
+    class="item-wrapper"
+    @mouseover="onHover = true"
+    @mouseleave="onHover = false"
+    :class="{ shake: onHover }"
+  >
     <b-card no-body class="overflow-hidden no-border">
       <b-row no-gutters>
         <b-col sm="4" md="6" class="item-wrapper__img-wrapper">
@@ -25,6 +30,7 @@
                 <b>Price:</b>
                 {{ dishObj.price }} €
               </p>
+              <!--
               <ul>
                 <b>It is available for: </b>
                 <li
@@ -34,7 +40,7 @@
                   {{ category }}
                 </li>
               </ul>
-              <!-- <p>
+              <p>
                 <b>Can be ordered for: </b>
                 {{ dishObj.availableForTime }}
               </p>
@@ -68,6 +74,11 @@ import ButtonEdit from "./UI/ButtonEdit";
 
 export default {
   name: "DishesListItem",
+  data() {
+    return {
+      onHover: false,
+    };
+  },
   components: {
     ButtonEdit,
   },
@@ -82,17 +93,26 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .item-wrapper {
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
-    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
-    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   margin: 20px 20px;
   width: 100%;
   max-width: 500px;
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+    .btn-edit {
+      box-shadow: -10px -10px 45px -15px rgb(0, 0, 0 / 10%);
+    }
+  }
 
   &__img-wrapper {
+    max-width: 150px !important;
     padding: 20px;
   }
 
@@ -127,5 +147,28 @@ export default {
 }
 .no-border {
   border: none;
+}
+.shake .item-wrapper__btn-edit button svg {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(2px, 0, 0);
+  }
 }
 </style>
