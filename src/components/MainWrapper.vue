@@ -1,11 +1,9 @@
 <template>
-  <div class="main-wrapper container">
-    <b-container class="bv-example-row">
-      <b-row>
-        <DishesList />
-      </b-row>
-    </b-container>
-  </div>
+  <b-container class="main-wrapper">
+    <b-row>
+      <DishesList />
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -18,7 +16,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.main-wrapper {
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,11 +1,25 @@
 <template>
-  <div>
-    <DishesListItem v-for="dish in dishes" :key="dish.id" :dishObj="dish" />
+  <div class="list">
+    <transition-group
+      @before-enter="beforeEnter"
+      @enter="enter"
+      :css="false"
+      appear
+    >
+      <DishesListItem
+        v-for="(dish, index) in dishes"
+        :key="dish.id"
+        :dishObj="dish"
+        :data-index="index"
+        class="dishes-list-item"
+      />
+    </transition-group>
   </div>
 </template>
 
 <script>
 import DishesListItem from "./DishesListItem";
+import gsap from "gsap";
 
 export default {
   name: "DishesList",
@@ -196,7 +210,41 @@ export default {
   components: {
     DishesListItem,
   },
+  beforeMount() {
+    //window.addEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
+    //this.scrollAnimation();
+  },
+  methods: {
+    beforeEnter(el) {
+      gsap.set(el, {
+        scale: 0.5,
+        autoAlpha: 0,
+        transform: "translateY(500px)",
+      });
+    },
+    enter(el, done) {
+      gsap.to(el, {
+        opacity: 1,
+        scale: 1,
+        autoAlpha: 1,
+        ease: "power2.out",
+        stagger: 0.5,
+        y: 0,
+        duration: 0.8,
+        delay: el.dataset.index * 0.5,
+        onComplete: done,
+      });
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.list > span {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+</style>

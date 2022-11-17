@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="Dishes">
     <MainWrapper />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import MainWrapper from "@/components/MainWrapper.vue";
 
 export default {
-  name: "Home",
+  name: "Dishes",
   components: {
     MainWrapper,
   },
