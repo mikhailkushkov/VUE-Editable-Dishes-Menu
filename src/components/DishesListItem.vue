@@ -11,14 +11,14 @@
     />
     <b-card no-body class="overflow-hidden no-border">
       <b-row no-gutters>
-        <b-col sm="6" md="6" class="item-wrapper__img-wrapper">
+        <b-col sm="6" md="4" class="item-wrapper__img-wrapper">
           <b-card-img
             :src="require('../assets/images/' + dishObj.image)"
             alt="Image"
             class="rounded-0"
           />
         </b-col>
-        <b-col sm="6" md="6">
+        <b-col sm="6" md="8">
           <b-card-body>
             <b-card-text class="align-left item-wrapper__card-content-wrapper">
               <b>
@@ -100,8 +100,8 @@ export default {
     emitRemoveEvent() {
       this.$emit("removeItem", { id: this.dishObj.id });
     },
-    emitEditEvent(e) {
-      console.log(e.timeStamp);
+    emitEditEvent() {
+      this.$emit("showModalEdit", this.dishObj.id, this.dishObj);
     },
   },
 };
@@ -116,13 +116,19 @@ export default {
   width: 100%;
   max-width: 500px;
   transition: box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  //height: 100%;
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
     .btn-edit {
-      box-shadow: -10px -10px 45px -15px rgb(0, 0, 0 / 10%);
+      //box-shadow: -10px -10px 45px -15px rgb(0, 0, 0 / 10%);
+      box-shadow: -4px -2px 20px -10px #0000007d;
     }
+  }
+  .card {
+    border-color: transparent;
   }
 
   &__img-wrapper {

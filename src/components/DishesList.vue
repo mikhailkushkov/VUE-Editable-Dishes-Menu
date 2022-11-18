@@ -1,21 +1,28 @@
 <template>
-  <div class="list">
-    <transition-group
-      @before-enter="beforeEnter"
-      @enter="enter"
-      :css="false"
-      appear
-    >
-      <DishesListItem
-        v-for="(dish, index) in this.$store.state.dishesData"
-        :key="dish.id"
-        :dishObj="dish"
-        :data-index="index"
-        class="dishes-list-item"
-        @removeItem="onRemoveItem(index)"
-      />
-    </transition-group>
-  </div>
+  <BContainer class="list">
+    <BRow>
+      <transition-group
+        @before-enter="beforeEnter"
+        @enter="enter"
+        :css="false"
+        appear
+      >
+        <DishesListItem
+          v-for="(dish, index) in this.$store.state.dishesData"
+          :key="dish.id"
+          :dishObj="dish"
+          :data-index="index"
+          class="dishes-list-item"
+          @removeItem="onRemoveItem(index)"
+          @showModalEdit="onShowModalEdit"
+        />
+      </transition-group>
+      <BModal :id="modalEdit" hide-footer>
+        {{ selectedDish }}
+      </BModal>
+      <!-- <ModalEdit /> -->
+    </BRow>
+  </BContainer>
 </template>
 
 <script>
@@ -25,6 +32,12 @@ import gsap from "gsap";
 
 export default {
   name: "DishesList",
+  data() {
+    return {
+      modalEdit: "dish-edit",
+      selectedDish: "",
+    };
+  },
   components: {
     DishesListItem,
   },
@@ -59,6 +72,11 @@ export default {
         return false;
       }
     },
+    onShowModalEdit(id, objData) {
+      console.log(id);
+      this.selectedDish = objData;
+      this.$bvModal.show(this.modalEdit);
+    },
   },
   mounted() {
     this.GET_DISHES_REQUEST();
@@ -67,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list > span {
+.list .row span {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
