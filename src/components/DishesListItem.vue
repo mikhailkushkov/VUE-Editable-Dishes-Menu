@@ -5,16 +5,20 @@
     @mouseleave="onHover = false"
     :class="{ shake: onHover }"
   >
+    <ButtonDelete
+      class="item-wrapper__btn-delete"
+      @click.native="emitRemoveEvent"
+    />
     <b-card no-body class="overflow-hidden no-border">
       <b-row no-gutters>
-        <b-col sm="4" md="6" class="item-wrapper__img-wrapper">
+        <b-col sm="6" md="6" class="item-wrapper__img-wrapper">
           <b-card-img
             :src="require('../assets/images/' + dishObj.image)"
             alt="Image"
             class="rounded-0"
           />
         </b-col>
-        <b-col sm="4" md="6">
+        <b-col sm="6" md="6">
           <b-card-body>
             <b-card-text class="align-left item-wrapper__card-content-wrapper">
               <b>
@@ -65,12 +69,13 @@
         </b-col>
       </b-row>
     </b-card>
-    <ButtonEdit class="item-wrapper__btn-edit" />
+    <ButtonEdit class="item-wrapper__btn-edit" @click.native="emitEditEvent" />
   </div>
 </template>
 
 <script>
 import ButtonEdit from "./UI/ButtonEdit";
+import ButtonDelete from "./UI/ButtonDelete";
 
 export default {
   name: "DishesListItem",
@@ -81,6 +86,7 @@ export default {
   },
   components: {
     ButtonEdit,
+    ButtonDelete,
   },
   props: {
     dishObj: {
@@ -88,6 +94,14 @@ export default {
       default() {
         return {};
       },
+    },
+  },
+  methods: {
+    emitRemoveEvent() {
+      this.$emit("removeItem", { id: this.dishObj.id });
+    },
+    emitEditEvent(e) {
+      console.log(e.timeStamp);
     },
   },
 };
@@ -140,6 +154,18 @@ export default {
     position: absolute;
     right: -20px;
     bottom: -20px;
+  }
+  &__btn-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+
+    button {
+      padding: 1px 5px;
+      background: sienna;
+      border-color: transparent;
+    }
   }
 }
 .align-left {

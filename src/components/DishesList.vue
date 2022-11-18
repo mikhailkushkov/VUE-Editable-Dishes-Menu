@@ -12,6 +12,7 @@
         :dishObj="dish"
         :data-index="index"
         class="dishes-list-item"
+        @removeItem="onRemoveItem(index)"
       />
     </transition-group>
   </div>
@@ -28,7 +29,7 @@ export default {
     DishesListItem,
   },
   methods: {
-    ...mapActions(["GET_DISHES_REQUEST"]),
+    ...mapActions(["GET_DISHES_REQUEST", "REMOVE_ITEM_FROM_LIST"]),
 
     beforeEnter(el) {
       gsap.set(el, {
@@ -49,6 +50,14 @@ export default {
         delay: el.dataset.index * 0.3,
         onComplete: done,
       });
+    },
+    async onRemoveItem(index) {
+      const isConfirmed = await this.$bvModal.msgBoxConfirm("Are you sure?");
+      if (isConfirmed) {
+        this.REMOVE_ITEM_FROM_LIST(index);
+      } else {
+        return false;
+      }
     },
   },
   mounted() {

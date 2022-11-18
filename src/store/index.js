@@ -12,6 +12,9 @@ export default new Vuex.Store({
     SET_DISHES_TO_MENU: (state, dishes) => {
       state.dishesData = dishes;
     },
+    REMOVE_ITEM: (state, index) => {
+      state.dishesData.splice(index, 1);
+    },
   },
   actions: {
     GET_DISHES_REQUEST({ commit }) {
@@ -26,6 +29,9 @@ export default new Vuex.Store({
           console.log(error);
           return error;
         });
+    },
+    REMOVE_ITEM_FROM_LIST({ commit }, index) {
+      commit("REMOVE_ITEM", index);
     },
   },
   getters: {
