@@ -17,8 +17,11 @@
           @showModalEdit="onShowModalEdit"
         />
       </transition-group>
-      <BModal :id="modalEdit" hide-footer>
-        {{ selectedDish }}
+      <!-- <ModalEdit> -->
+      <BModal :id="modalEdit" hide-footer centered>
+        <!-- {{ ModalDishContent }} -->
+        <ModalDishContent :dish="selectedDish" />
+        <!-- {{ ModalDishContent }} -->
       </BModal>
       <!-- <ModalEdit /> -->
     </BRow>
@@ -27,6 +30,7 @@
 
 <script>
 import DishesListItem from "./DishesListItem";
+import ModalDishContent from "./ModalDishContent.vue";
 import { mapActions } from "vuex";
 import gsap from "gsap";
 
@@ -35,11 +39,12 @@ export default {
   data() {
     return {
       modalEdit: "dish-edit",
-      selectedDish: "",
+      selectedDish: {},
     };
   },
   components: {
     DishesListItem,
+    ModalDishContent,
   },
   methods: {
     ...mapActions(["GET_DISHES_REQUEST", "REMOVE_ITEM_FROM_LIST"]),
@@ -73,7 +78,6 @@ export default {
       }
     },
     onShowModalEdit(id, objData) {
-      console.log(id);
       this.selectedDish = objData;
       this.$bvModal.show(this.modalEdit);
     },
