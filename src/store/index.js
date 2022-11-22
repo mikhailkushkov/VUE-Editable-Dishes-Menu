@@ -9,7 +9,7 @@ export default new Vuex.Store({
     dishesData: [],
   },
   mutations: {
-    SET_DISHES_TO_MENU: (state, dishes) => {
+    RENDER_DISHES: (state, dishes) => {
       state.dishesData = dishes;
     },
     REMOVE_ITEM: (state, index) => {
@@ -22,7 +22,7 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((dishes) => {
-          commit("SET_DISHES_TO_MENU", dishes.data);
+          commit("RENDER_DISHES", dishes.data);
           return dishes;
         })
         .catch((error) => {

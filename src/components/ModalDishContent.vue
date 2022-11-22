@@ -2,7 +2,7 @@
   <div>
     <b-container fluid>
       <b-row class="mb-1">
-        <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form @submit.prevent="handleSubmit">
           <div class="form-group-item">
             <b-form-group
               label="Name:"
@@ -31,20 +31,23 @@
           </div>
 
           <div class="form-group-item">
-            <b-form-group
-              label="Please choose when it's available:"
-              v-slot="{ ariaDescribedby }"
-            >
+            <b-form-group v-slot="{ ariaDescribedby }">
               <b-form-checkbox-group
-                id="checkbox-group-1"
-                v-model="selected"
-                :options="dish.categoryBasedOnTime"
+                v-model="dish.categoryBasedOnTime"
                 :aria-describedby="ariaDescribedby"
-              ></b-form-checkbox-group>
+                label="Please choose when it's available:"
+              >
+                <b-form-checkbox value="breakfast">breakfast</b-form-checkbox>
+                <b-form-checkbox value="dinner">dinner</b-form-checkbox>
+                <b-form-checkbox value="lunch">lunch</b-form-checkbox>
+              </b-form-checkbox-group>
+              <div>
+                Available for:
+                <strong v-show="dish.categoryBasedOnTime.length">{{
+                  dish.categoryBasedOnTime
+                }}</strong>
+              </div>
             </b-form-group>
-            <div>
-              Available for: <strong>{{ selected }}</strong>
-            </div>
           </div>
 
           <div class="form-group-item">
@@ -97,9 +100,9 @@
               Selected: <strong>{{ dish.isAvailable }}</strong>
             </div>
           </div>
-        </form>
+          <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
       </b-row>
-      <b-button type="submit" variant="primary">Submit</b-button>
     </b-container>
   </div>
 </template>
@@ -107,17 +110,19 @@
 <script>
 export default {
   name: "ModalDishContent",
-  data() {
-    return {
-      show: false,
-      selected: [],
-    };
-  },
   props: {
     dish: {
       type: Object,
       String,
+      default() {
+        return {};
+      },
       required: true,
+    },
+  },
+  methods: {
+    handleSubmit() {
+      console.log(JSON.stringify(this.dish));
     },
   },
 };
