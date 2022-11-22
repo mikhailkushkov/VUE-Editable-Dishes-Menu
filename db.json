@@ -9,10 +9,7 @@
       "availableForTime": "dinner",
       "menuCategory": "pizzas",
       "weight": 130,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 30,
       "image": "img-1.png"
     },
@@ -25,10 +22,7 @@
       "availableForTime": "breakfast",
       "menuCategory": "pizzas",
       "weight": 130,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 30,
       "image": "img-2.png"
     },
@@ -41,10 +35,7 @@
       "availableForTime": "breakfast",
       "menuCategory": "pizzas",
       "weight": 130,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 35,
       "image": "img-3.png"
     },
@@ -57,10 +48,7 @@
       "availableForTime": "lunch",
       "menuCategory": "soups",
       "weight": 260,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 25,
       "image": "img-4.png"
     },
@@ -73,10 +61,7 @@
       "availableForTime": "lunch",
       "menuCategory": "soups",
       "weight": 230,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 25,
       "image": "img-5.png"
     },
@@ -89,10 +74,7 @@
       "availableForTime": "lunch",
       "menuCategory": "soups",
       "weight": 230,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 15,
       "image": "img-6.png"
     },
@@ -105,10 +87,7 @@
       "availableForTime": "dinner",
       "menuCategory": "main-dishes",
       "weight": 160,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 25,
       "image": "img-7.png"
     },
@@ -121,10 +100,7 @@
       "availableForTime": "dinner",
       "menuCategory": "main-dishes",
       "weight": 300,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 25,
       "image": "img-8.png"
     },
@@ -137,10 +113,7 @@
       "availableForTime": "lunch",
       "menuCategory": "deserts",
       "weight": 240,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 25,
       "image": "img-9.png"
     },
@@ -153,10 +126,7 @@
       "availableForTime": "lunch",
       "menuCategory": "deserts",
       "weight": 310,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 15,
       "image": "img-10.png"
     },
@@ -169,10 +139,7 @@
       "availableForTime": "lunch",
       "menuCategory": "beverages",
       "weight": 120,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 5,
       "image": "img-11.png"
     },
@@ -185,10 +152,7 @@
       "availableForTime": "lunch",
       "menuCategory": "beverages",
       "weight": 250,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 5,
       "image": "img-12.png"
     },
@@ -201,10 +165,7 @@
       "availableForTime": "lunch",
       "menuCategory": "beverages",
       "weight": 210,
-      "isAvailable": {
-        "option1": true,
-        "option2": false
-      },
+      "availability": {},
       "waitingTime": 5,
       "image": "img-13.png"
     }

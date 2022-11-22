@@ -32,38 +32,8 @@
               </p>
               <p>
                 <b>Price:</b>
-                {{ dishObj.price }} €
+                {{ dishObj.price | toFix}}
               </p>
-              <!--
-              <ul>
-                <b>It is available for: </b>
-                <li
-                  v-for="category in dishObj.categoryBasedOnTime"
-                  :key="category.id"
-                >
-                  {{ category }}
-                </li>
-              </ul>
-              <p>
-                <b>Can be ordered for: </b>
-                {{ dishObj.availableForTime }}
-              </p>
-              <p>
-                <b>Menu category:</b>
-                {{ dishObj.menuCategory }}
-              </p>
-              <p>
-                <b>Weight: </b>
-                {{ dishObj.weight }} Gr.
-              </p>
-              <p>
-                <b>Availability: </b>
-                {{ dishObj.isAvailable }}
-              </p>
-              <p>
-                <b>Time to prepare: </b>
-                {{ dishObj.waitingTime }} Min.
-              </p> -->
             </b-card-text>
           </b-card-body>
         </b-col>
@@ -76,6 +46,7 @@
 <script>
 import ButtonEdit from "./UI/ButtonEdit";
 import ButtonDelete from "./UI/ButtonDelete";
+import toFix from "../filters/toFix";
 
 export default {
   name: "DishesListItem",
@@ -83,6 +54,9 @@ export default {
     return {
       onHover: false,
     };
+  },
+  filters: {
+    toFix,
   },
   components: {
     ButtonEdit,

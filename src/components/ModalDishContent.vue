@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-wrapper">
     <b-container fluid>
       <b-row class="mb-1">
         <b-form @submit.prevent="handleSubmit">
@@ -27,10 +27,10 @@
           </div>
 
           <div class="form-group-item">
-            <span>Price: </span> {{ dish.price }} €
+            <span>Price: </span> {{ dish.price | toFix }}
           </div>
 
-          <div class="form-group-item">
+          <div class="form-group-item available-wrap">
             <b-form-group v-slot="{ ariaDescribedby }">
               <b-form-checkbox-group
                 v-model="dish.categoryBasedOnTime"
@@ -81,14 +81,14 @@
               v-slot="{ ariaDescribedby }"
             >
               <b-form-radio
-                v-model="dish.isAvailable"
+                v-model="dish.availability"
                 :aria-describedby="ariaDescribedby"
                 name="radio-input"
                 value="isAvailable"
                 >is available</b-form-radio
               >
               <b-form-radio
-                v-model="dish.isAvailable"
+                v-model="dish.availability"
                 :aria-describedby="ariaDescribedby"
                 name="radio-input"
                 value="isNotAvailable"
@@ -97,10 +97,17 @@
             </b-form-group>
 
             <div class="mt-3">
-              Selected: <strong>{{ dish.isAvailable }}</strong>
+              Selected:
+              <strong v-show="Object.keys(dish.availability).length !== 0">{{
+                dish.availability
+              }}</strong>
             </div>
           </div>
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <div class="footer">
+            <b-button type="submit" variant="warning" @click="$emit('close')"
+              >Submit</b-button
+            >
+          </div>
         </b-form>
       </b-row>
     </b-container>
@@ -108,8 +115,12 @@
 </template>
 
 <script>
+import toFix from "../filters/toFix";
 export default {
   name: "ModalDishContent",
+  filters: {
+    toFix,
+  },
   props: {
     dish: {
       type: Object,
@@ -128,9 +139,14 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form-group-item {
   margin-bottom: 20px;
+  box-shadow: rgb(67, 71, 85 / 27%) 0px, 0px 0.25em,
+    rgb(90, 125, 188 / 5%) 0px 0.25em 1em;
+  padding: 3px 3px;
+  border-radius: 5px;
+  background-color: #dcdcdc94;
 
   .order-time {
     justify-content: flex-start;
@@ -166,5 +182,11 @@ export default {
       }
     }
   }
+}
+.available-wrap .custom-control {
+  display: flex;
+}
+.available-wrap label.custom-control-label {
+  margin-left: 3px;
 }
 </style>

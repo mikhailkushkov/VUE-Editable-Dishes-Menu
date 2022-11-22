@@ -18,9 +18,9 @@
         />
       </transition-group>
       <!-- <ModalEdit> -->
-      <BModal :id="modalEdit" hide-footer centered>
+      <BModal :id="modalEdit" hide-footer centered class="modal-content">
         <!-- {{ ModalDishContent }} -->
-        <ModalDishContent :dish="selectedDish" />
+        <ModalDishContent :dish="selectedDish" @close="closeModal" />
         <!-- {{ ModalDishContent }} -->
       </BModal>
       <!-- <ModalEdit /> -->
@@ -81,6 +81,10 @@ export default {
       this.selectedDish = objData;
       this.$bvModal.show(this.modalEdit);
     },
+
+    closeModal() {
+      this.$bvModal.hide(this.modalEdit);
+    },
   },
   mounted() {
     this.GET_DISHES_REQUEST();
@@ -88,10 +92,22 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .list .row span {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.modal-content {
+  header {
+    background-color: #aa7814;
+    padding: 5px 10px;
+    button {
+      border: none;
+      background-color: transparent;
+      font-size: 2em;
+      color: white;
+    }
+  }
 }
 </style>
