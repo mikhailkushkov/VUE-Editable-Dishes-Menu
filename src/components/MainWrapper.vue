@@ -5,7 +5,7 @@
         <DishesList />
       </b-col>
       <b-col>
-        <DishesMenu />
+        <DishesMenu :itemsData="MENU_LIST" />
       </b-col>
     </b-row>
   </b-container>
@@ -14,11 +14,15 @@
 <script>
 import DishesList from "./DishesList.vue";
 import DishesMenu from "./DishesMenu.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "MainWrapper",
   components: {
     DishesList,
     DishesMenu,
+  },
+  computed: {
+    ...mapGetters(["MENU_LIST"]),
   },
 };
 </script>

@@ -47,7 +47,11 @@ export default {
     ModalDishContent,
   },
   methods: {
-    ...mapActions(["GET_DISHES_REQUEST", "REMOVE_ITEM_FROM_LIST"]),
+    ...mapActions([
+      "GET_DISHES_REQUEST",
+      "REMOVE_ITEM_FROM_LIST",
+      "SELECTED_DISH_FROM_MODAL",
+    ]),
 
     beforeEnter(el) {
       gsap.set(el, {
@@ -83,7 +87,9 @@ export default {
     },
 
     closeModal() {
+      console.log(this.selectedDish);
       this.$bvModal.hide(this.modalEdit);
+      this.SELECTED_DISH_FROM_MODAL(this.selectedDish);
     },
   },
   mounted() {

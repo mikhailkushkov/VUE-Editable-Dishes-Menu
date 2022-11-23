@@ -3,8 +3,13 @@
     <b-row>
       <b-col>
         <h2 class="menu__title">{{ menuTitle }}</h2>
+        <p></p>
         <div class="menu__items-wrapper">
-          <DishesMenuItem />
+          <DishesMenuItem
+            v-for="item in itemsData"
+            :key="item.id"
+            :menuData="item"
+          />
         </div>
       </b-col>
     </b-row>
@@ -22,6 +27,14 @@ export default {
     return {
       menuTitle: "menu",
     };
+  },
+  props: {
+    itemsData: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
   },
 };
 </script>

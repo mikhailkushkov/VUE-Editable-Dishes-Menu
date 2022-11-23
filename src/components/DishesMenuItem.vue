@@ -1,10 +1,18 @@
 <template>
-  <div>menu items goes here...</div>
+  <div>{{ menuData }}</div>
 </template>
 
 <script>
 export default {
   name: "DishesMenuItem",
+  props: {
+    menuData: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
 };
 </script>
 
