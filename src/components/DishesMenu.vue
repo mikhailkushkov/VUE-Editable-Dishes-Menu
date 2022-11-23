@@ -3,7 +3,6 @@
     <b-row>
       <b-col>
         <h2 class="menu__title">{{ menuTitle }}</h2>
-        <p></p>
         <div class="menu__items-wrapper">
           <DishesMenuItem
             v-for="item in itemsData"
@@ -59,6 +58,9 @@ export default {
       left: 50%;
       margin-left: -50px;
     }
+  }
+  &__items-wrapper {
+    padding-top: 50px;
   }
 }
 </style>
