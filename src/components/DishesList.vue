@@ -96,7 +96,7 @@ export default {
 .list .row span {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .modal-content {
   header {

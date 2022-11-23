@@ -32,7 +32,7 @@
               </p>
               <p>
                 <b>Price:</b>
-                {{ dishObj.price | toFix}}
+                {{ dishObj.price | toFix }}
               </p>
             </b-card-text>
           </b-card-body>
