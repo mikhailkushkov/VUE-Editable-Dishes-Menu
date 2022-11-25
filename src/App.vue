@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav"><router-link to="/">Dishes</router-link></div>
+    <div id="nav">
+      <router-link to="/">Dishes</router-link>
+    </div>
     <router-view />
   </div>
 </template>
@@ -20,10 +22,13 @@
 
 #nav {
   padding: 30px;
-
+  margin-bottom: 30px;
+  background-color: #f2c15d;
   a {
     font-weight: bold;
     color: #2c3e50;
+    text-decoration: none;
+    font-size: 18px;
 
     &.router-link-exact-active {
       color: #42b983;

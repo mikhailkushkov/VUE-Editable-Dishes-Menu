@@ -1,6 +1,7 @@
 <template>
   <BContainer class="list">
     <BRow>
+      <ButtonAdd class="btn-add-position" @click.native="addNewDish" />
       <transition-group
         @before-enter="beforeEnter"
         @enter="enter"
@@ -24,6 +25,14 @@
         <!-- {{ ModalDishContent }} -->
       </BModal>
       <!-- <ModalEdit /> -->
+
+      <!-- <ModalAdd> -->
+      <BModal :id="modalAdd" hide-footer centered class="modal-content-default">
+        <!-- {{ ModalDishContentDefault }} -->
+        <ModalDishContentDefault @close="closeModal" />
+        <!-- {{ ModalDishContentDefault }} -->
+      </BModal>
+      <!-- <ModalAdd /> -->
     </BRow>
   </BContainer>
 </template>
@@ -31,6 +40,8 @@
 <script>
 import DishesListItem from "./DishesListItem";
 import ModalDishContent from "./ModalDishContent.vue";
+import ModalDishContentDefault from "./ModalDishContentDefault.vue";
+import ButtonAdd from "./UI/ButtonAdd.vue";
 import { mapActions } from "vuex";
 import gsap from "gsap";
 
@@ -39,12 +50,15 @@ export default {
   data() {
     return {
       modalEdit: "dish-edit",
+      modalAdd: "dish-add",
       selectedDish: {},
     };
   },
   components: {
     DishesListItem,
     ModalDishContent,
+    ModalDishContentDefault,
+    ButtonAdd,
   },
   methods: {
     ...mapActions([
@@ -53,6 +67,10 @@ export default {
       "SELECTED_DISH_FROM_MODAL",
     ]),
 
+    addNewDish() {
+      this.$bvModal.show(this.modalAdd);
+    },
+
     beforeEnter(el) {
       gsap.set(el, {
         scale: 0.5,
@@ -60,7 +78,7 @@ export default {
         transform: "translateY(500px)",
       });
     },
-    enter(el, done) {
+    enter(el) {
       gsap.to(el, {
         opacity: 1,
         scale: 1,
@@ -70,7 +88,6 @@ export default {
         y: 0,
         duration: 0.5,
         delay: el.dataset.index * 0.3,
-        onComplete: done,
       });
     },
     async onRemoveItem(index) {
@@ -85,9 +102,7 @@ export default {
       this.selectedDish = objData;
       this.$bvModal.show(this.modalEdit);
     },
-
     closeModal() {
-      console.log(this.selectedDish);
       this.$bvModal.hide(this.modalEdit);
       this.SELECTED_DISH_FROM_MODAL(this.selectedDish);
     },
@@ -99,11 +114,21 @@ export default {
 </script>
 
 <style lang="scss">
-.list .row span {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+.list {
+  position: relative;
+  .btn-add-position {
+    top: -58px;
+    left: -35px;
+    position: absolute;
+    display: flex;
+  }
+  .row span {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 }
+
 .modal-content {
   header {
     background-color: #aa7814;
