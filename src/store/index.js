@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
     RENDER_DISHES: (state, dishes) => {
-      state.dishesData = dishes;
+      state.dishesData = [...dishes];
     },
     REMOVE_ITEM: (state, index) => {
       state.dishesData.splice(index, 1);

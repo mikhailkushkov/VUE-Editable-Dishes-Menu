@@ -3,7 +3,7 @@
     <b-container fluid class="menu-item-wrapper">
       <b-row>
         <b-col md="9">
-          <span class="menu-item-wrapper__title">{{ menuData.name }}</span>
+          <span class="menu-item-wrapper__title">{{ toCapitalize }}</span>
         </b-col>
         <b-col md="3">
           <span class="menu-item-wrapper__price">{{
@@ -39,6 +39,7 @@
 
 <script>
 import toFix from "../filters/toFix";
+
 export default {
   name: "DishesMenuItem",
   props: {
@@ -51,6 +52,12 @@ export default {
   },
   filters: {
     toFix,
+  },
+  computed: {
+    toCapitalize() {
+      let dishName = this.menuData.name;
+      return dishName.charAt(0).toUpperCase() + dishName.slice(1).toLowerCase();
+    },
   },
 };
 </script>
