@@ -16,8 +16,23 @@ export default new Vuex.Store({
     REMOVE_ITEM: (state, index) => {
       state.dishesData.splice(index, 1);
     },
+    ADD_ITEM: (state, newDishObj) => {
+      state.dishesData.push(newDishObj);
+    },
     SET_DATA: (state, selected) => {
-      state.selectedDishFromModal.push(selected);
+      if (state.selectedDishFromModal.length) {
+        let isProductInMenu = false;
+        state.selectedDishFromModal.map((item) => {
+          if (item.id === selected.id) {
+            isProductInMenu = true;
+          }
+        });
+        if (!isProductInMenu) {
+          state.selectedDishFromModal.push(selected);
+        }
+      } else {
+        state.selectedDishFromModal.push(selected);
+      }
     },
   },
   actions: {
@@ -36,6 +51,9 @@ export default new Vuex.Store({
     },
     REMOVE_ITEM_FROM_LIST({ commit }, index) {
       commit("REMOVE_ITEM", index);
+    },
+    ADD_ITEM_TO_LIST({ commit }, newDishObj) {
+      commit("ADD_ITEM", newDishObj);
     },
     SELECTED_DISH_FROM_MODAL({ commit }, selected) {
       commit("SET_DATA", selected);

@@ -52,6 +52,7 @@ export default {
       modalEdit: "dish-edit",
       modalAdd: "dish-add",
       selectedDish: {},
+      newDishObj: {},
     };
   },
   components: {
@@ -64,11 +65,13 @@ export default {
     ...mapActions([
       "GET_DISHES_REQUEST",
       "REMOVE_ITEM_FROM_LIST",
+      "ADD_ITEM_TO_LIST",
       "SELECTED_DISH_FROM_MODAL",
     ]),
 
     addNewDish() {
       this.$bvModal.show(this.modalAdd);
+      this.ADD_ITEM_TO_LIST(this.newDishObj);
     },
 
     beforeEnter(el) {
