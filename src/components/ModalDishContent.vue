@@ -27,7 +27,19 @@
           </div>
 
           <div class="form-group-item">
-            <span>Price: </span> {{ dish.price }}
+            <b-form-group
+              label="Price: "
+              label-for="price-input"
+              invalid-feedback="Price is required"
+              class="d-flex"
+            >
+              <b-form-input
+                id="price-input"
+                v-model="dish.price"
+                type="number"
+                required
+              />
+            </b-form-group>
           </div>
 
           <div class="form-group-item available-wrap">

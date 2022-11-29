@@ -6,7 +6,7 @@
           <span class="menu-item-wrapper__title">{{ toCapitalize }}</span>
         </b-col>
         <b-col md="3">
-          <span class="menu-item-wrapper__price">{{ menuData.price }}</span>
+          <span class="menu-item-wrapper__price">{{ menuData.price }} €</span>
         </b-col>
         <div class="menu-item-wrapper__separator"></div>
         <b-col>

@@ -20,19 +20,21 @@ export default new Vuex.Store({
       state.dishesData.push(newDishObj);
     },
     SET_DATA: (state, selected) => {
-      if (state.selectedDishFromModal.length) {
-        let isProductInMenu = false;
-        state.selectedDishFromModal.map((item) => {
-          if (item.id === selected.id) {
-            isProductInMenu = true;
-          }
-        });
-        if (!isProductInMenu) {
-          state.selectedDishFromModal.push(selected);
-        }
-      } else {
-        state.selectedDishFromModal.push(selected);
-      }
+      // TODO: NEED REFACTORING
+      // if (state.selectedDishFromModal.length) {
+      //   let isProductInMenu = false;
+      //   state.selectedDishFromModal.map((item) => {
+      //     if (item.id === selected.id) {
+      //       isProductInMenu = true;
+      //     }
+      //   });
+      //   if (!isProductInMenu) {
+      //     state.selectedDishFromModal.push(selected);
+      //   }
+      // } else {
+      //   state.selectedDishFromModal.push(selected);
+      // }
+      state.selectedDishFromModal.push(selected);
     },
   },
   actions: {
