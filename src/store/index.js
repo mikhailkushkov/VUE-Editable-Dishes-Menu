@@ -41,7 +41,10 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((dishes) => {
-          commit("RENDER_DISHES", dishes.data);
+          dishes.data.map((item) => {
+            item.name = item.name.toUpperCase();
+          }),
+            commit("RENDER_DISHES", dishes.data);
           return dishes;
         })
         .catch((error) => {
@@ -53,7 +56,7 @@ export default new Vuex.Store({
       commit("REMOVE_ITEM", index);
     },
     ADD_ITEM_TO_LIST({ commit }, newDishObj) {
-      commit("ADD_ITEM", newDishObj);
+      commit("ADD_ITEM", { ...newDishObj });
     },
     SELECTED_DISH_FROM_MODAL({ commit }, selected) {
       commit("SET_DATA", selected);

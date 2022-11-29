@@ -27,7 +27,7 @@
           </div>
 
           <div class="form-group-item">
-            <span>Price: </span> {{ dish.price | toFix }}
+            <span>Price: </span> {{ dish.price }}
           </div>
 
           <div class="form-group-item available-wrap">

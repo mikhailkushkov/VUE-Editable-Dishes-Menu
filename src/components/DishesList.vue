@@ -1,7 +1,7 @@
 <template>
   <BContainer class="list">
     <BRow>
-      <ButtonAdd class="btn-add-position" @click.native="addNewDish" />
+      <ButtonAdd class="btn-add-position" @click.native="onShowModalAdd" />
       <transition-group
         @before-enter="beforeEnter"
         @enter="enter"
@@ -10,12 +10,14 @@
       >
         <DishesListItem
           v-for="(dish, index) in this.$store.state.dishesData"
-          :key="dish.id"
+          :key="index"
           :dishObj="dish"
           :data-index="index"
+          :newDishObj="newDishObj"
           class="dishes-list-item"
           @removeItem="onRemoveItem(index)"
           @showModalEdit="onShowModalEdit"
+          @add-new-dish="addNewObjToList"
         />
       </transition-group>
       <!-- <ModalEdit> -->
@@ -29,7 +31,10 @@
       <!-- <ModalAdd> -->
       <BModal :id="modalAdd" hide-footer centered class="modal-content-default">
         <!-- {{ ModalDishContentDefault }} -->
-        <ModalDishContentDefault @close="closeModal" />
+        <ModalDishContentDefault
+          :newDishObj="newDishObj"
+          @close="addNewObjToList"
+        />
         <!-- {{ ModalDishContentDefault }} -->
       </BModal>
       <!-- <ModalAdd /> -->
@@ -69,11 +74,6 @@ export default {
       "SELECTED_DISH_FROM_MODAL",
     ]),
 
-    addNewDish() {
-      this.$bvModal.show(this.modalAdd);
-      this.ADD_ITEM_TO_LIST(this.newDishObj);
-    },
-
     beforeEnter(el) {
       gsap.set(el, {
         scale: 0.5,
@@ -109,7 +109,23 @@ export default {
       this.$bvModal.hide(this.modalEdit);
       this.SELECTED_DISH_FROM_MODAL(this.selectedDish);
     },
+    onShowModalAdd() {
+      this.$bvModal.show(this.modalAdd);
+    },
+    addNewObjToList() {
+      //triggering funk in store actions
+      this.ADD_ITEM_TO_LIST(this.newDishObj);
+      //clear inputs before modal closing
+      this.newDishObj.name = "";
+      this.newDishObj.shortDescription = "";
+      this.newDishObj.price = "";
+      this.newDishObj.weight = "";
+      this.newDishObj.waitingTime = "";
+      // close a modal
+      this.$bvModal.hide(this.modalAdd);
+    },
   },
+
   mounted() {
     this.GET_DISHES_REQUEST();
   },

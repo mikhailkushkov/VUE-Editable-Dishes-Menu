@@ -2,14 +2,18 @@
   <div class="content-wrapper">
     <b-container fluid>
       <b-row class="mb-1">
-        <b-form @submit.prevent="handleSubmit">
+        <b-form @submit.prevent="onSubmit">
           <div class="form-group-item">
             <b-form-group
               label="Name:"
               label-for="dish-name-input"
               invalid-feedback="Name is required"
             >
-              <b-form-input id="dish-name-input" required />
+              <b-form-input
+                id="dish-name-input"
+                v-model="newDishObj.name"
+                required
+              />
             </b-form-group>
           </div>
 
@@ -21,17 +25,65 @@
             <b-form-textarea
               id="dish-textarea-description"
               invalid-feedback="Description is required"
+              v-model="newDishObj.shortDescription"
             >
             </b-form-textarea>
           </div>
 
           <div class="form-group-item">
-            <span>Price: </span> <input type="number" />
+            <b-form-group
+              label="Price: "
+              label-for="price-input"
+              invalid-feedback="Price is required"
+              class="d-flex price"
+            >
+              <b-form-input
+                id="price-input"
+                v-model="newDishObj.price"
+                type="number"
+                required
+              />
+            </b-form-group>
+          </div>
+
+          <div class="form-group-item d-flex">
+            <b-form-group
+              label="Weight: "
+              label-for="weight"
+              invalid-feedback="Weight is required"
+              class="d-flex weight"
+            >
+              <b-form-input
+                id="weight"
+                v-model="newDishObj.weight"
+                type="number"
+                required
+              />
+            </b-form-group>
+            <span class="form-group-item__gramm">Gr.</span>
+          </div>
+
+          <div class="form-group-item d-flex">
+            <b-form-group
+              label="Awaiting time after a dish order: "
+              label-for="order-time-input"
+              invalid-feedback="Time is required"
+              class="d-flex order-time"
+            >
+              <b-form-input
+                id="order-time-input"
+                v-model="newDishObj.waitingTime"
+                type="number"
+                required
+              />
+            </b-form-group>
+            <span class="form-group-item__min">Min.</span>
           </div>
 
           <div class="form-group-item available-wrap">
             <b-form-group v-slot="{ ariaDescribedby }">
               <b-form-checkbox-group
+                v-model="newDishObj.categoryBasedOnTime"
                 :aria-describedby="ariaDescribedby"
                 label="Please choose when it's available:"
               >
@@ -41,27 +93,9 @@
               </b-form-checkbox-group>
               <div>
                 Available for:
-                <strong> </strong>
+                <strong>{{ newDishObj.categoryBasedOnTime }}</strong>
               </div>
             </b-form-group>
-          </div>
-
-          <div class="form-group-item">
-            <span>Belongs to category: </span>
-          </div>
-
-          <div class="form-group-item"><span>Weight: </span> Gr.</div>
-
-          <div class="form-group-item d-flex">
-            <b-form-group
-              label="Awaiting time after a dish order: "
-              label-for="order-time-input"
-              invalid-feedback="Time is required"
-              class="d-flex order-time"
-            >
-              <b-form-input id="order-time-input" type="number" required />
-            </b-form-group>
-            <span class="form-group-item__min">Min.</span>
           </div>
 
           <div class="form-group-item">
@@ -70,12 +104,14 @@
               v-slot="{ ariaDescribedby }"
             >
               <b-form-radio
+                v-model="newDishObj.availability"
                 :aria-describedby="ariaDescribedby"
                 name="radio-input"
                 value="isAvailable"
                 >is available</b-form-radio
               >
               <b-form-radio
+                v-model="newDishObj.availability"
                 :aria-describedby="ariaDescribedby"
                 name="radio-input"
                 value="isNotAvailable"
@@ -85,12 +121,18 @@
 
             <div class="mt-3">
               Selected:
-              <strong> </strong>
+              <strong>{{ newDishObj.availability }}</strong>
             </div>
           </div>
+
+          <!-- <div class="form-group-item item-wrapper__img-wrapper">
+            <b-form-file v-model="file2" class="mt-3" plain></b-form-file>
+            <div class="mt-3">Selected file: {{ file2 ? file2.name : "" }}</div>
+          </div> -->
+
           <div class="footer">
             <b-button type="submit" variant="warning" @click="$emit('close')"
-              >Add</b-button
+              >Submit</b-button
             >
           </div>
         </b-form>
@@ -102,10 +144,22 @@
 <script>
 export default {
   name: "ModalDishContentDefault",
-
+  data() {
+    return {
+      file2: null,
+    };
+  },
+  props: {
+    newDishObj: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
   methods: {
-    handleSubmit() {
-      console.log("clicked");
+    onSubmit() {
+      this.$emit("add-new-dish", this.newDishObj);
     },
   },
 };

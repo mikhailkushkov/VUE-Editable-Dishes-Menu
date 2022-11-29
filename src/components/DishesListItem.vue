@@ -11,18 +11,18 @@
     />
     <b-card no-body class="overflow-hidden no-border">
       <b-row no-gutters>
-        <b-col sm="6" md="4" class="item-wrapper__img-wrapper">
+        <!-- <b-col sm="6" md="4" class="item-wrapper__img-wrapper">
           <b-card-img
             :src="require('../assets/images/' + dishObj.image)"
             alt="Image"
             class="rounded-0"
-          />
-        </b-col>
+          />{{ dishObj.image }}
+        </b-col> -->
         <b-col sm="6" md="8">
           <b-card-body>
             <b-card-text class="align-left item-wrapper__card-content-wrapper">
               <b>
-                <h5>{{ dishObj.name.toUpperCase() }}</h5>
+                <h5>{{ dishObj.name }}</h5>
               </b>
               <p>
                 <b>Short description: </b>
@@ -32,7 +32,7 @@
               </p>
               <p>
                 <b>Price:</b>
-                {{ dishObj.price | toFix }}
+                {{ dishObj.price }}
               </p>
             </b-card-text>
           </b-card-body>
