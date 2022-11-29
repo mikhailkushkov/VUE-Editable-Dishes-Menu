@@ -35,7 +35,7 @@
               label="Price: "
               label-for="price-input"
               invalid-feedback="Price is required"
-              class="d-flex price"
+              class="d-flex"
             >
               <b-form-input
                 id="price-input"
@@ -51,7 +51,7 @@
               label="Weight: "
               label-for="weight"
               invalid-feedback="Weight is required"
-              class="d-flex weight"
+              class="d-flex"
             >
               <b-form-input
                 id="weight"
@@ -68,7 +68,7 @@
               label="Awaiting time after a dish order: "
               label-for="order-time-input"
               invalid-feedback="Time is required"
-              class="d-flex order-time"
+              class="d-flex"
             >
               <b-form-input
                 id="order-time-input"
@@ -170,9 +170,27 @@ export default {
   margin-bottom: 20px;
   box-shadow: rgb(67, 71, 85 / 27%) 0px, 0px 0.25em,
     rgb(90, 125, 188 / 5%) 0px 0.25em 1em;
-  padding: 3px 3px;
+  padding: 5px 5px;
   border-radius: 5px;
   background-color: #dcdcdc94;
+  &__gramm {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+  }
+
+  .form-group {
+    align-items: center;
+
+    /deep/ label {
+      margin-right: 5px;
+    }
+    #price-input,
+    #weight,
+    #order-time-input {
+      max-width: 100px;
+    }
+  }
 
   .order-time {
     justify-content: flex-start;

@@ -18,7 +18,7 @@
             class="rounded-0"
           />{{ dishObj.image }}
         </b-col> -->
-        <b-col sm="6" md="8">
+        <b-col sm="8">
           <b-card-body>
             <b-card-text class="align-left item-wrapper__card-content-wrapper">
               <b>
@@ -88,7 +88,7 @@ export default {
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   margin: 20px 20px;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   transition: box-shadow 0.3s ease-in-out;
   border-radius: 10px;
   //height: 100%;
