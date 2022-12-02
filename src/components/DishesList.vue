@@ -5,7 +5,6 @@
       @emitSortByCategory="sortDishByCategoryFunc"
       @emitSortByPrice="sortDishByPriceFunc"
     />
-
     <BRow>
       <ButtonAdd class="btn-add-position" @click.native="onShowModalAdd" />
       <transition-group
@@ -34,7 +33,6 @@
         <!-- {{ ModalDishContent }} -->
       </BModal>
       <!-- <ModalEdit /> -->
-
       <!-- <ModalAdd> -->
       <BModal :id="modalAdd" hide-footer centered class="modal-content-default">
         <!-- {{ ModalDishContentDefault }} -->
