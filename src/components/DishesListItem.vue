@@ -94,7 +94,7 @@ export default {
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  margin: 20px 20px;
+  margin: 20px 20px 30px 20px;
   width: 100%;
   max-width: 450px;
   transition: box-shadow 0.3s ease-in-out;

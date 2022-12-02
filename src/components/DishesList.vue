@@ -13,6 +13,7 @@
         :css="false"
         appear
         name="dishes"
+        tag="DIV"
       >
         <DishesListItem
           v-for="(dish, index) in this.$store.state.dishesData"
@@ -90,7 +91,7 @@ export default {
         transform: "translateY(500px)",
       });
     },
-    enter(el) {
+    enter(el, done) {
       gsap.to(el, {
         opacity: 1,
         scale: 1,
@@ -98,8 +99,9 @@ export default {
         ease: "power2.out",
         stagger: 0.5,
         y: 0,
-        duration: 0.5,
+        duration: 0.7,
         delay: el.dataset.index * 0.3,
+        onComplete: done,
       });
     },
     async onRemoveItem(index) {
@@ -137,6 +139,7 @@ export default {
       this.SORT_DISHES_BY_PRICE();
     },
     sortDishByCategoryFunc() {
+      setTimeout(() => {}, 3000);
       this.SORT_DISHES_BY_CATEGORY();
     },
   },
@@ -150,6 +153,7 @@ export default {
 <style lang="scss">
 .list {
   position: relative;
+
   .dishes-move {
     transition: all 1s;
   }
@@ -159,13 +163,7 @@ export default {
     position: absolute;
     display: flex;
   }
-  .row span {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
 }
-
 .modal-content {
   header {
     background-color: #aa7814;
