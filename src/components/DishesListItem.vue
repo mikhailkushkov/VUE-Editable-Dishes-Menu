@@ -28,6 +28,11 @@
                 </h5>
               </b>
               <p>
+                <span class="item-wrapper__card-content-wrapper__description">
+                  Category: {{ dishObj.menuCategory }}
+                </span>
+              </p>
+              <p>
                 <b>Short description: </b>
                 <span class="item-wrapper__card-content-wrapper__description">
                   {{ dishObj.shortDescription }}

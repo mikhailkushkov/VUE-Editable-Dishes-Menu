@@ -1,5 +1,11 @@
 <template>
   <BContainer class="list">
+    <SortPanel
+      :dishesData="$store.state.dishesData"
+      @emitSortByCategory="sortDishByCategoryFunc"
+      @emitSortByPrice="sortDishByPriceFunc"
+    />
+
     <BRow>
       <ButtonAdd class="btn-add-position" @click.native="onShowModalAdd" />
       <transition-group
@@ -7,6 +13,7 @@
         @enter="enter"
         :css="false"
         appear
+        name="dishes"
       >
         <DishesListItem
           v-for="(dish, index) in this.$store.state.dishesData"
@@ -46,6 +53,7 @@
 import DishesListItem from "./DishesListItem";
 import ModalDishContent from "./ModalDishContent.vue";
 import ModalDishContentDefault from "./ModalDishContentDefault.vue";
+import SortPanel from "./SortPanel.vue";
 import ButtonAdd from "./UI/ButtonAdd.vue";
 import { mapActions } from "vuex";
 import gsap from "gsap";
@@ -65,6 +73,7 @@ export default {
     ModalDishContent,
     ModalDishContentDefault,
     ButtonAdd,
+    SortPanel,
   },
   methods: {
     ...mapActions([
@@ -72,6 +81,8 @@ export default {
       "REMOVE_ITEM_FROM_LIST",
       "ADD_ITEM_TO_LIST",
       "SELECTED_DISH_FROM_MODAL",
+      "SORT_DISHES_BY_PRICE",
+      "SORT_DISHES_BY_CATEGORY",
     ]),
 
     beforeEnter(el) {
@@ -124,6 +135,12 @@ export default {
       // close a modal
       this.$bvModal.hide(this.modalAdd);
     },
+    sortDishByPriceFunc() {
+      this.SORT_DISHES_BY_PRICE();
+    },
+    sortDishByCategoryFunc() {
+      this.SORT_DISHES_BY_CATEGORY();
+    },
   },
 
   mounted() {
@@ -135,6 +152,9 @@ export default {
 <style lang="scss">
 .list {
   position: relative;
+  .dishes-move {
+    transition: all 1s;
+  }
   .btn-add-position {
     top: -58px;
     left: -35px;

@@ -36,6 +36,14 @@ export default new Vuex.Store({
       // }
       state.selectedDishFromModal.push(selected);
     },
+    SORT_BY_PRICE: (state) => {
+      state.dishesData.sort((a, b) => a.price - b.price);
+    },
+    SORT_BY_CATEGORY: (state) => {
+      state.dishesData.sort((a, b) =>
+        a.menuCategory.localeCompare(b.menuCategory)
+      );
+    },
   },
   actions: {
     GET_DISHES_REQUEST({ commit }) {
@@ -62,6 +70,12 @@ export default new Vuex.Store({
     },
     SELECTED_DISH_FROM_MODAL({ commit }, selected) {
       commit("SET_DATA", selected);
+    },
+    SORT_DISHES_BY_PRICE({ commit }) {
+      commit("SORT_BY_PRICE");
+    },
+    SORT_DISHES_BY_CATEGORY({ commit }) {
+      commit("SORT_BY_CATEGORY");
     },
   },
   getters: {
