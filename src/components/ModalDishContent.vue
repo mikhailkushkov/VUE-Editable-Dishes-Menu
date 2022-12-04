@@ -110,9 +110,7 @@
 
             <div class="mt-3">
               Selected:
-              <strong v-show="Object.keys(dish.availability).length !== 0">{{
-                dish.availability
-              }}</strong>
+              <strong>{{ dish.availability }}</strong>
             </div>
           </div>
           <div class="footer">
@@ -136,16 +134,7 @@ export default {
   props: {
     dish: {
       type: Object,
-      String,
-      default() {
-        return {};
-      },
       required: true,
-    },
-  },
-  methods: {
-    handleSubmit() {
-      console.log(JSON.stringify(this.dish));
     },
   },
 };
